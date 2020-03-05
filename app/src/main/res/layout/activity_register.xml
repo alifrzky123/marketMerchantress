@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RegisterActivity">
+    <LinearLayout
+        android:id="@+id/reg_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+       <com.google.android.material.textfield.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:counterMaxLength="20"
+           app:counterEnabled="true"
+           android:id="@+id/TIL_edit">
+
+           <EditText
+               android:id="@+id/et_reg_name"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:hint="First Name"
+               android:maxLength="20"
+               android:ems="20"/>
+       </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/reg_last_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/reg_name_wrapper"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterMaxLength="20"
+            app:counterEnabled="true"
+            android:id="@+id/TIL_edit_last">
+
+            <EditText
+                android:id="@+id/et_reg_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Last Name"
+                android:maxLength="20"
+                android:ems="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/reg_email_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/reg_last_name_wrapper"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/TIL_edit_email">
+
+            <EditText
+                android:id="@+id/et_reg_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/reg_password_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/reg_email_wrapper"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterMaxLength="20"
+            app:counterEnabled="true"
+            app:passwordToggleEnabled="true"
+            android:id="@+id/TIL_edit_pasw">
+
+            <EditText
+                android:id="@+id/et_reg_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Password"
+                android:maxLength="20"
+                android:ems="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/reg_confpassword_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/reg_password_wrapper"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterMaxLength="20"
+            app:counterEnabled="true"
+            app:passwordToggleEnabled="true"
+            android:id="@+id/TIL_edit_confpasw">
+
+            <EditText
+                android:id="@+id/et_reg_confpassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Confirm Password"
+                android:maxLength="20"
+                android:ems="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/reg_merch_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/reg_confpassword_wrapper"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterMaxLength="20"
+            app:counterEnabled="true"
+            android:id="@+id/TIL_edit_merch">
+
+            <EditText
+                android:id="@+id/et_reg_merch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Merchant Name"
+                android:maxLength="20"
+                android:ems="20"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tv_already_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Already Log In? Click Me!"
+        android:textAlignment="center"
+        android:onClick="txtAlrdLogin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal" />
+</androidx.constraintlayout.widget.ConstraintLayout>
