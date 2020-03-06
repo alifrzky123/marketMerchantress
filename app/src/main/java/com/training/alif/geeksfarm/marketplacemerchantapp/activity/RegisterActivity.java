@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.training.alif.geeksfarm.marketplacemerchantapp.LoginActivity;
 import com.training.alif.geeksfarm.marketplacemerchantapp.R;
 import com.training.alif.geeksfarm.marketplacemerchantapp.Utils.TokenManager;
 import com.training.alif.geeksfarm.marketplacemerchantapp.entity.AccessToken;
@@ -52,29 +54,22 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         requestQueue = Volley.newRequestQueue(this);
+        ButterKnife.bind(this);
         init();
-        Volley();
-        isValidInput();
+
 
     }
     @OnClick(R.id.tv_already_login)
     public void txtAlrdLogin(View view) {
-//        Intent i = new Intent(RegisterActivity.this,LoginActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(i);
     }
-
+    @OnClick(R.id.btn_register)
     public void register(){
-        btnReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 if(isValidInput() == true){
                     Volley();
                 }
-            }
-        });
     }
-
-
 
     private void init(){
         etFirstName = findViewById(R.id.et_reg_name);
@@ -97,39 +92,31 @@ public class RegisterActivity extends AppCompatActivity {
         merchantName = etMerchName.getText().toString();
 
         String url = "http://210.210.154.65:4444/api/auth/signup";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                accessToken = new Gson().fromJson(response,AccessToken.class);
-                TokenManager.getInstance(getSharedPreferences("pref",MODE_PRIVATE)).saveToken(accessToken);
-            }
-        }, new ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                String body = "";
-                try{
-                    body = new String(error.networkResponse.data,"UTF-8");
-                    JSONObject res = new JSONObject(body);
-                    RegisterErrorResponse errorResponse = new Gson()
-                            .fromJson(res.getJSONObject("error")
-                                    .toString()
-                                    ,RegisterErrorResponse.class);
-                    if(errorResponse.getEmailError().size()>0){
-                        if(errorResponse.getEmailError().get(0)!= null){
-                            etEmail.setError(errorResponse.getEmailError().get(0));
-                        }
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            accessToken = new Gson().fromJson(response,AccessToken.class);
+            TokenManager.getInstance(getSharedPreferences("pref",MODE_PRIVATE)).saveToken(accessToken);
+            Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+        }, error -> {
+            String statusCode = String.valueOf(error.networkResponse.statusCode);
+            try{
+                String body = new String(error.networkResponse.data,"UTF-8");
+                JSONObject res = new JSONObject(body);
+                RegisterErrorResponse errorResponse = new Gson()
+                        .fromJson(res.getJSONObject("error")
+                                .toString()
+                                ,RegisterErrorResponse.class);
+                if(errorResponse.getEmailError().size()>0){
+                    if(errorResponse.getEmailError().get(0)!= null){
+                        etEmail.setError(errorResponse.getEmailError().get(0));
                     }
-                }catch (UnsupportedEncodingException e){
-                    e.printStackTrace();
-
-                }catch (JSONException e){
-                    e.printStackTrace();
                 }
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+
+            }catch (JSONException e){
+                e.printStackTrace();
             }
-
         })
-
         {
             @Override
             public Map<String,String> getHeaders() throws AuthFailureError{
